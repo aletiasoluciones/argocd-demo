@@ -15,5 +15,5 @@ spec:
     protocol: TCP
     targetPort: 8443
   selector:
-    deploymentconfig: app
+    deployment: app
   type: ClusterIP
