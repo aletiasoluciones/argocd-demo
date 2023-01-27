@@ -20,6 +20,12 @@ spec:
           value: database
         - name: DB_PORT
           value: "3306"
+        - name: DB_USER
+          value: argocd
+        - name: DB_PASS
+          value: argocd
+        - name: DB_NAME
+          value: argocd
         image: quay.io/aletia/php-sql-sample:latest
         imagePullPolicy: IfNotPresent
         name: app
