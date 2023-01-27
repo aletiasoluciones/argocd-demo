@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: database
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: database
+  template:
+    metadata:
+      labels:
+        deployment: database
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: argocd
+        - name: MYSQL_PASSWORD
+          value: argocd
+        - name: MYSQL_ROOT_PASSWORD
+          value: argocd
+        - name: MYSQL_USER
+          value: argocd
+        image: registry.access.redhat.com/rhscl/mariadb-102-rhel7:latest
+        imagePullPolicy: IfNotPresent
+        name: database
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

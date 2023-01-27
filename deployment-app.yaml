@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app
+  name: app
+spec:
+  selector:
+    deploymentconfig: app
+  template:
+    metadata:
+      labels:
+        deploymentconfig: app
+    spec:
+      containers:
+      - env:
+        - name: DB_HOST
+          value: database
+        - name: DB_PORT
+          value: "3306"
+        image: quay.io/aletia/php-sql-sample:latest
+        imagePullPolicy: IfNotPresent
+        name: app
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
