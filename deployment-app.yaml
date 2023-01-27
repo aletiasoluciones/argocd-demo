@@ -6,7 +6,8 @@ metadata:
   name: app
 spec:
   selector:
-    deployment: app
+    matchLabels:
+      deployment: app
   template:
     metadata:
       labels:
